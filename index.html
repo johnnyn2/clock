@@ -52,12 +52,14 @@
         }
         function setStyles() {
             let style = getParameterByName('style');
-            const pairs = style.split(';');
-            pairs.forEach(p => {
-                const [k, v] = p.split(':');
-                console.log(`k: ${k}; v: ${v}`);
-                document.getElementById('clock').style[k] = v;
-            });
+            if (style !== null) {
+                const pairs = style.split(';');
+                pairs.forEach(p => {
+                    const [k, v] = p.split(':');
+                    console.log(`k: ${k}; v: ${v}`);
+                    document.getElementById('clock').style[k] = v;
+                });
+            }
         }
     </script>
 </head>
