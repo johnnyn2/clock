@@ -19,6 +19,10 @@
         }
     </style>
     <script>
+        function init() {
+            setStyles();
+            startTime();
+        }
         function startTime() {
             const today = new Date();
             let yr = today.getFullYear();
@@ -38,9 +42,26 @@
             if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
             return i;
         }
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        function setStyles() {
+            let style = getParameterByName('style');
+            const pairs = style.split(';');
+            pairs.forEach(p => {
+                const [k, v] = p.split(':');
+                console.log(`k: ${k}; v: ${v}`);
+                document.getElementById('clock').style[k] = v;
+            });
+        }
     </script>
 </head>
-<body onload="startTime()">
+<body onload="init()">
     <div id="clock"></div>
 </body>
 </html>
